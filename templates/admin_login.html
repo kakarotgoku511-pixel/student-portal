@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | KidBullChris Tech</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                radial-gradient(circle at top, #172554, #020617 60%);
+
+            color: white;
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 430px;
+
+            padding: 40px;
+
+            background: rgba(15, 23, 42, 0.85);
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 0 40px rgba(0,0,0,0.5);
+
+            backdrop-filter: blur(15px);
+
+            animation: appear 0.7s ease;
+        }
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        .icon {
+            text-align: center;
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+
+            margin-bottom: 20px;
+
+            border-radius: 10px;
+
+            border: 1px solid #334155;
+
+            background: #020617;
+
+            color: white;
+
+            outline: none;
+
+            font-size: 16px;
+        }
+
+        input:focus {
+            border-color: #38bdf8;
+
+            box-shadow:
+                0 0 10px rgba(56,189,248,0.3);
+        }
+
+        button {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #0ea5e9,
+                #2563eb
+            );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(37,99,235,0.35);
+        }
+
+        .message {
+            margin-bottom: 20px;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            background: rgba(239,68,68,0.15);
+
+            border: 1px solid rgba(239,68,68,0.4);
+
+            color: #fca5a5;
+
+            text-align: center;
+        }
+
+        .student-login {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #38bdf8;
+
+            text-decoration: none;
+        }
+
+        .student-login:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <div class="icon">
+            🔐
+        </div>
+
+        <h1>Admin Portal</h1>
+
+        <p class="subtitle">
+            KidBullChris Tech Student Portal
+        </p>
+
+
+        {% if message %}
+
+        <div class="message">
+            {{ message }}
+        </div>
+
+        {% endif %}
+
+
+        <form method="POST" action="/admin/login">
+
+            <label>
+                Admin Username
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter admin username"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter admin password"
+                required
+            >
+
+
+            <button type="submit">
+                Login to Admin Portal
+            </button>
+
+        </form>
+
+
+        <a
+            href="{{ url_for('login') }}"
+            class="student-login"
+        >
+            ← Student Login
+        </a>
+
+    </div>
+
+</body>
+</html>

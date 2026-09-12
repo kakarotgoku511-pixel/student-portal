@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Student Account</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+
+            background:
+                radial-gradient(circle at top, #102a56, #020617 65%);
+
+            color: white;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 35px;
+
+            background: rgba(7, 20, 45, 0.94);
+
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 20px;
+
+            box-shadow:
+                0 0 35px rgba(0, 174, 255, 0.18),
+                inset 0 0 30px rgba(0, 174, 255, 0.03);
+        }
+
+        h1 {
+            text-align: center;
+            color: #38bdf8;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+
+            margin-bottom: 20px;
+
+            background: #020617;
+            color: white;
+
+            border: 1px solid #334155;
+            border-radius: 10px;
+
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #38bdf8;
+
+            box-shadow:
+                0 0 10px rgba(56, 189, 248, 0.25);
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        select option {
+            background: #020617;
+            color: white;
+        }
+
+        .picture-box {
+            margin-bottom: 20px;
+        }
+
+        .picture-box input {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .picture-preview {
+            display: none;
+
+            width: 100px;
+            height: 100px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 3px solid #38bdf8;
+
+            margin: 0 auto 15px auto;
+
+            box-shadow:
+                0 0 20px rgba(56, 189, 248, 0.35);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+
+            border: none;
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #0284c7,
+                    #38bdf8
+                );
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .message {
+            margin-bottom: 20px;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            background: rgba(239, 68, 68, 0.12);
+
+            border: 1px solid rgba(239, 68, 68, 0.35);
+
+            color: #fca5a5;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+        .requirements {
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            background: rgba(15, 23, 42, 0.8);
+
+            border: 1px solid #1e293b;
+        }
+
+        .requirements h3 {
+            color: #38bdf8;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .requirements p {
+            color: #94a3b8;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .login-link {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #38bdf8;
+
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        .file-note {
+            color: #64748b;
+            font-size: 12px;
+            margin-top: -12px;
+            margin-bottom: 18px;
+        }
+
+        @media (max-width: 500px) {
+
+            .container {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Create Account</h1>
+
+        <p class="subtitle">
+            Student Portal Registration
+        </p>
+
+
+        {% if message %}
+
+            <div class="message">
+                {{ message }}
+            </div>
+
+        {% endif %}
+
+
+        <form
+            method="POST"
+            action="/signup"
+            enctype="multipart/form-data"
+        >
+
+
+            <!-- USERNAME -->
+
+            <label for="username">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your username"
+                required
+            >
+
+
+            <!-- EMAIL -->
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+
+            <!-- PASSWORD -->
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a password"
+                required
+            >
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <label for="confirm_password">
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="confirm_password"
+                name="confirm_password"
+                placeholder="Confirm your password"
+                required
+            >
+
+
+            <!-- CLASS -->
+
+            <label for="class_name">
+                Class
+            </label>
+
+            <select
+                id="class_name"
+                name="class_name"
+                required
+            >
+
+                <option value="">
+                    Select your class
+                </option>
+
+                <option value="JSS1">
+                    JSS1
+                </option>
+
+                <option value="JSS2">
+                    JSS2
+                </option>
+
+                <option value="JSS3">
+                    JSS3
+                </option>
+
+                <option value="SS1">
+                    SS1
+                </option>
+
+                <option value="SS2">
+                    SS2
+                </option>
+
+                <option value="SS3">
+                    SS3
+                </option>
+
+            </select>
+
+
+            <!-- PROFILE PICTURE -->
+
+            <div class="picture-box">
+
+                <label for="profile_picture">
+                    Student Picture
+                </label>
+
+                <img
+                    id="picturePreview"
+                    class="picture-preview"
+                    alt="Picture preview"
+                >
+
+                <input
+                    type="file"
+                    id="profile_picture"
+                    name="profile_picture"
+                    accept="image/*"
+                    required
+                >
+
+                <p class="file-note">
+                    Select a clear profile picture.
+                </p>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button type="submit">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <!-- PASSWORD REQUIREMENTS -->
+
+        <div class="requirements">
+
+            <h3>
+                Password Requirements
+            </h3>
+
+            <p>
+                Your password must contain:
+                <br>
+                • At least one alphabet letter
+                <br>
+                • At least one number
+                <br>
+                • At least one symbol
+            </p>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <a
+            href="/login"
+            class="login-link"
+        >
+            Already have an account? Login
+        </a>
+
+    </div>
+
+
+    <script>
+
+        const pictureInput =
+            document.getElementById("profile_picture");
+
+        const picturePreview =
+            document.getElementById("picturePreview");
+
+
+        pictureInput.addEventListener(
+            "change",
+            function () {
+
+                const file = this.files[0];
+
+                if (file) {
+
+                    const reader =
+                        new FileReader();
+
+                    reader.onload =
+                        function (event) {
+
+                            picturePreview.src =
+                                event.target.result;
+
+                            picturePreview.style.display =
+                                "block";
+                        };
+
+                    reader.readAsDataURL(file);
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

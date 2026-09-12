@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Results</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .section h2 {
+            margin-bottom: 15px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th,
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #b02a37;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .student-name {
+            font-weight: bold;
+        }
+
+        .class-name {
+            color: #666;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{{ url_for('admin_dashboard') }}" class="back-btn">
+        ← Back to Admin Dashboard
+    </a>
+
+    <h1>Manage Results</h1>
+
+    <p class="subtitle">
+        View and delete uploaded student results.
+    </p>
+
+
+    <!-- MIDTERM RESULTS -->
+
+    <div class="section">
+
+        <h2>📊 Midterm Results</h2>
+
+        {% if midterm_results %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Class</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Score</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for result in midterm_results %}
+
+                    <tr>
+
+                        <td class="student-name">
+                            {{ result.username }}
+                        </td>
+
+                        <td class="class-name">
+                            {{ result.class_name }}
+                        </td>
+
+                        <td>
+                            {{ result.email }}
+                        </td>
+
+                        <td>
+                            {{ result.subject }}
+                        </td>
+
+                        <td>
+                            {{ result.score }}
+                        </td>
+
+                        <td>
+
+                            <form
+                                method="POST"
+                                action="{{ url_for('delete_midterm', result_id=result.id) }}"
+                                onsubmit="return confirm('Are you sure you want to delete this midterm result?');"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="delete-btn"
+                                >
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+            <div class="empty">
+                No midterm results have been uploaded yet.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- EXAM RESULTS -->
+
+    <div class="section">
+
+        <h2>📝 Exam Results</h2>
+
+        {% if exam_results %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Class</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Score</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for result in exam_results %}
+
+                    <tr>
+
+                        <td class="student-name">
+                            {{ result.username }}
+                        </td>
+
+                        <td class="class-name">
+                            {{ result.class_name }}
+                        </td>
+
+                        <td>
+                            {{ result.email }}
+                        </td>
+
+                        <td>
+                            {{ result.subject }}
+                        </td>
+
+                        <td>
+                            {{ result.score }}
+                        </td>
+
+                        <td>
+
+                            <form
+                                method="POST"
+                                action="{{ url_for('delete_exam', result_id=result.id) }}"
+                                onsubmit="return confirm('Are you sure you want to delete this exam result?');"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="delete-btn"
+                                >
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+            <div class="empty">
+                No examination results have been uploaded yet.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

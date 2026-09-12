@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Student Portal | Login</title>
+
+
+    <style>
+
+        /* ==========================================
+           RESET
+        ========================================== */
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        /* ==========================================
+           BODY
+        ========================================== */
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            overflow: hidden;
+
+            font-family: Arial, sans-serif;
+
+            background:
+
+                radial-gradient(
+                    circle at center,
+                    #102b55 0%,
+                    #061020 45%,
+                    #01040b 100%
+                );
+
+            color: white;
+
+        }
+
+
+        /* ==========================================
+           FUTURISTIC BACKGROUND
+        ========================================== */
+
+        .background {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 0;
+
+            background:
+
+                linear-gradient(
+                    rgba(0, 120, 255, 0.08) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(0, 120, 255, 0.08) 1px,
+                    transparent 1px
+                );
+
+            background-size: 50px 50px;
+
+            animation:
+
+                gridMove
+                8s
+                linear
+                infinite;
+
+        }
+
+
+        @keyframes gridMove {
+
+            from {
+
+                background-position:
+                    0 0;
+
+            }
+
+            to {
+
+                background-position:
+                    50px 50px;
+
+            }
+
+        }
+
+
+        /* ==========================================
+           CENTER GLOW
+        ========================================== */
+
+        .background::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 600px;
+
+            height: 600px;
+
+            left: 50%;
+
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            background:
+
+                radial-gradient(
+                    circle,
+                    rgba(0, 120, 255, 0.25),
+                    transparent 70%
+                );
+
+            filter: blur(40px);
+
+        }
+
+
+        /* ==========================================
+           LOGIN CONTAINER
+        ========================================== */
+
+        .login-container {
+
+            position: relative;
+
+            z-index: 5;
+
+            width: 90%;
+
+            max-width: 450px;
+
+            padding: 40px;
+
+            border:
+
+                1px
+                solid
+                rgba(
+                    0,
+                    170,
+                    255,
+                    0.5
+                );
+
+            border-radius: 20px;
+
+            background:
+
+                rgba(
+                    3,
+                    15,
+                    35,
+                    0.85
+                );
+
+            backdrop-filter:
+                blur(20px);
+
+            box-shadow:
+
+                0 0 20px
+                rgba(
+                    0,
+                    150,
+                    255,
+                    0.25
+                ),
+
+                0 0 60px
+                rgba(
+                    0,
+                    100,
+                    255,
+                    0.15
+                );
+
+            animation:
+
+                loginAppear
+                1s
+                ease-out
+                forwards;
+
+        }
+
+
+        @keyframes loginAppear {
+
+            0% {
+
+                opacity: 0;
+
+                transform:
+
+                    translateY(40px)
+                    scale(0.9);
+
+                filter: blur(10px);
+
+            }
+
+            100% {
+
+                opacity: 1;
+
+                transform:
+
+                    translateY(0)
+                    scale(1);
+
+                filter: blur(0);
+
+            }
+
+        }
+
+
+        /* ==========================================
+           TITLE
+        ========================================== */
+
+        .logo {
+
+            text-align: center;
+
+            margin-bottom: 10px;
+
+            font-size: 38px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-shadow:
+
+                0 0 10px #00aaff,
+
+                0 0 25px #0077ff,
+
+                0 0 50px #0055ff;
+
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #a9c9e8;
+
+            margin-bottom: 30px;
+
+            font-size: 15px;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        /* ==========================================
+           FORM
+        ========================================== */
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            color: #b9ddff;
+
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 14px 16px;
+
+            border:
+
+                1px
+                solid
+                rgba(
+                    0,
+                    170,
+                    255,
+                    0.35
+                );
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background:
+
+                rgba(
+                    0,
+                    10,
+                    25,
+                    0.8
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            transition:
+                0.3s;
+
+        }
+
+
+        .form-group input::placeholder {
+
+            color: #66809a;
+
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #00aaff;
+
+            box-shadow:
+
+                0 0 10px
+                rgba(
+                    0,
+                    170,
+                    255,
+                    0.5
+                );
+
+        }
+
+
+        /* ==========================================
+           LOGIN BUTTON
+        ========================================== */
+
+        .login-button {
+
+            width: 100%;
+
+            padding: 15px;
+
+            margin-top: 5px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #0066ff,
+                    #00aaff
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            box-shadow:
+
+                0 0 15px
+                rgba(
+                    0,
+                    140,
+                    255,
+                    0.4
+                );
+
+            transition:
+                0.3s;
+
+        }
+
+
+        .login-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+
+                0 0 25px
+                rgba(
+                    0,
+                    170,
+                    255,
+                    0.7
+                );
+
+        }
+
+
+        .login-button:active {
+
+            transform:
+                scale(0.98);
+
+        }
+
+
+        /* ==========================================
+           SIGN UP AREA
+        ========================================== */
+
+        .signup-text {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #8da9c4;
+
+            font-size: 14px;
+
+        }
+
+
+        .signup-link {
+
+            display: inline-block;
+
+            margin-top: 8px;
+
+            color: #00b7ff;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .signup-link:hover {
+
+            text-decoration: underline;
+
+            text-shadow:
+
+                0 0 10px #00aaff;
+
+        }
+
+
+        /* ==========================================
+           MESSAGE
+        ========================================== */
+
+        .message {
+
+            display: none;
+
+            margin-bottom: 20px;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            background:
+
+                rgba(
+                    255,
+                    50,
+                    50,
+                    0.12
+                );
+
+            border:
+
+                1px
+                solid
+                rgba(
+                    255,
+                    80,
+                    80,
+                    0.5
+                );
+
+            color: #ff8d8d;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 500px) {
+
+            .login-container {
+
+                padding: 30px 22px;
+
+            }
+
+
+            .logo {
+
+                font-size: 30px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         BACKGROUND
+    ========================================== -->
+
+    <div class="background"></div>
+
+
+    <!-- ==========================================
+         LOGIN BOX
+    ========================================== -->
+
+    <div class="login-container">
+
+
+        <div class="logo">
+
+            STUDENT PORTAL
+
+        </div>
+
+
+        <div class="subtitle">
+
+            Sign in to access your account
+
+        </div>
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <!-- LOGIN FORM -->
+
+        <form
+            id="loginForm"
+            method="POST"
+            action="/login"
+        >
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+
+                    Email Address
+
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+
+                    Password
+
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+
+                LOGIN
+
+            </button>
+
+
+        </form>
+
+
+        <!-- SIGN UP -->
+
+        <div class="signup-text">
+
+            Don't have an account?
+
+            <br>
+
+            <a
+                href="/signup"
+                class="signup-link"
+            >
+
+                Create Account
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

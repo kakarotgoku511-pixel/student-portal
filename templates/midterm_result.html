@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Midterm Result</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #102a56 0%,
+                    #061326 50%,
+                    #020617 100%
+                );
+
+            color: white;
+
+            padding: 30px;
+        }
+
+        .container {
+
+            max-width: 900px;
+
+            margin: auto;
+        }
+
+        h1 {
+
+            text-align: center;
+
+            color: #38bdf8;
+
+            margin-bottom: 10px;
+        }
+
+        .student {
+
+            text-align: center;
+
+            color: #cbd5e1;
+
+            margin-bottom: 30px;
+        }
+
+        .result-box {
+
+            background:
+                rgba(7, 20, 45, 0.9);
+
+            border:
+                1px solid
+                rgba(56, 189, 248, 0.25);
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            overflow-x: auto;
+        }
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+
+            padding: 15px;
+
+            text-align: left;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.1);
+        }
+
+        th {
+
+            color: #38bdf8;
+        }
+
+        td {
+
+            color: #e2e8f0;
+        }
+
+        .score {
+
+            font-weight: bold;
+
+            color: #4ade80;
+        }
+
+        .empty {
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            padding: 30px;
+        }
+
+        .back {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 12px 20px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(56, 189, 248, 0.12);
+
+            border:
+                1px solid
+                rgba(56, 189, 248, 0.3);
+
+            color: #38bdf8;
+
+            text-decoration: none;
+        }
+
+        .back:hover {
+
+            background:
+                rgba(56, 189, 248, 0.22);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        📊 Midterm Result
+    </h1>
+
+    <div class="student">
+
+        {{ session["username"] }}
+
+        ·
+
+        {{ session["class_name"] }}
+
+    </div>
+
+
+    <div class="result-box">
+
+        {% if results %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Subject
+                    </th>
+
+                    <th>
+                        Score
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for result in results %}
+
+                <tr>
+
+                    <td>
+                        {{ result["subject"] }}
+                    </td>
+
+                    <td class="score">
+
+                        {{ result["score"] }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+
+            No midterm result has been uploaded
+            for your account yet.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <a
+        href="{{ url_for('dashboard') }}"
+        class="back"
+    >
+
+        ← Back to Dashboard
+
+    </a>
+
+</div>
+
+</body>
+
+</html>
