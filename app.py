@@ -2131,6 +2131,19 @@ def logout():
 # ==========================================
 # START SERVER
 # ==========================================
+@app.route("/database-test")
+def database_test():
+    try:
+        connection = get_database()
+
+        if connection.is_connected():
+            connection.close()
+            return "Database connected successfully!"
+
+    except mysql.connector.Error as error:
+        return f"Database connection failed: {error}"
+
+    return "Database connection failed."
 
 if __name__ == "__main__":
 
@@ -2145,4 +2158,4 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=port,
         debug=False
-    )
+    ){}
